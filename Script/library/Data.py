@@ -1,0 +1,1 @@
+ignore=['SbjNam','UsrUnq','SrvyrComment','RvwComment','RvwName','ExReNum','Status','Test','SubjData','FrScName','Duration']

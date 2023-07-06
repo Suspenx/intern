@@ -2,23 +2,49 @@ from functions.get_path import getsav
 from library.apppandas import frame
 import csv
 import re
+import numpy as np
+from library.Data import ignore
 get_files = getsav()
+
+# function returns names, telephone number and address of respondents 
+def filter_(data_frame=frame()): 
+    filter=[]
+    i =0 
+    for column in data_frame.columns:
+            col= data_frame[column]
+            type= col.dtypes
+            if type == np.dtypes.ObjectDType and column not in ignore :
+               filter=[col]
+               print(filter)
+
+
+            
+    
+   
 
 def processSavFiles(files=None):
     if files is None:
         return
     
     for file in files:
-        print(file)
         data_frame = frame(path=file)
-        print(data_frame.head )
+        fnames= filter_(data_frame=data_frame)
+        print(fnames)
         
 
 processSavFiles(files=get_files)
 
 
-def get_name():
-    column_names= data_frame.columns
-    names=[]
-    for column in column_names:
-        name_matches = re.findall()
+
+
+#filter_name(data_frame=frame(path=))
+
+
+def filter_Number(data_frame):
+    number=[]
+    for column in data_frame.columns:
+        for index in data_frame:
+            numb= data_frame.loc[index, column]
+            if isinstance(numb, int) and len(numb)<=10 :
+                number.append(numb)
+
