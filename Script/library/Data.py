@@ -1,1 +1,2 @@
 ignore=['SbjNam','UsrUnq','SrvyrComment','RvwComment','RvwName','ExReNum','Status','Test','SubjData','FrScName','Duration']
+address=['location','drive','Kingston' 'kgn', 'Street', 'Road','Rd', 'Ave','Avenue', 'St.Andrew', 'Montego Bay', 'St.Ann','St.Catherine','St.Elizabeth','Manchester','Hanover','Cresent','St.Mary']

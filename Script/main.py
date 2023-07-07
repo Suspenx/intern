@@ -1,5 +1,6 @@
 from functions.get_path import getsav
 from library.apppandas import frame
+import pandas as pd
 import csv
 import re
 import numpy as np
@@ -13,14 +14,38 @@ def filter_(data_frame=frame()):
     for column in data_frame.columns:
             col= data_frame[column]
             type= col.dtypes
-            if type == np.dtypes.ObjectDType and column not in ignore :
-               filter=[col]
-               print(filter)
+            data_frame = data_frame[data_frame[column].dtypes == np.dtypes.ObjectDType ]
+            print (data_frame)
+            #if type == np.dtypes.ObjectDType and column not in ignore:
+                #print(col)
+                #for value in data_frame[col].iterateitems():
+                    #if identify_numb(value):
+                        #print('Phone#:',value)
+               #print(col)
+               #numbers_in_column= filter(lambda numb: re.match('^876',numb),filt)
+               #print( list (numbers_in_column)
+
+#function that returns dataframe with filtered values
+def get_columns_(data_frame= frame(), new_frame=frame()):
+    columns = [data_frame[col] for col in data_frame.columns if data_frame[col].dtypes == np.dtypes.ObjectDType and col not in ignore]
+    print (pd.DataFrame(data=columns))
+   
+    
+
+
+
+def get_rows_and_information(data_frame= frame()):
+    columns= get_columns_(data_frame= frame)
+    return pd.concat([read_rows_under_column(column,data_frame) for column in columns])
 
 
             
-    
-   
+        
+def identify_numb(value):
+    phone_pattern = r'^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$'
+    if re.match(phone_pattern,value):
+        return value
+
 
 def processSavFiles(files=None):
     if files is None:
@@ -28,7 +53,8 @@ def processSavFiles(files=None):
     
     for file in files:
         data_frame = frame(path=file)
-        fnames= filter_(data_frame=data_frame)
+        # displays to terminal
+        fnames= get_columns_(data_frame=data_frame)
         print(fnames)
         
 
