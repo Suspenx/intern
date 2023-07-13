@@ -76,4 +76,3 @@ if __name__ == '__main__':
     data = extractor.get_data(file_path="data.csv")
     extractor.frequency_distribution_test(docs=data)
 
-
